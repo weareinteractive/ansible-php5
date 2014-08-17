@@ -1,0 +1,33 @@
+---
+
+- name: Installing packages
+  apt: >
+    pkg={{ item }}
+    state=latest
+  with_items:
+    - php5
+    - php5-cli
+    - php-pear
+  tags:
+    - web
+    - php5
+
+- name: Installing xtra packages
+  apt: >
+    pkg={{ item }}
+    state=latest
+  with_items: php5_packages
+  tags:
+    - web
+    - php5
+
+- name: Creating log dir
+  file: >
+    dest=/var/log/php5
+    state=directory
+    owner=www-data
+    group=adm
+    mode=0750
+  tags:
+    - web
+    - php5

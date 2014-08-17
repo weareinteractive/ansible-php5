@@ -1,0 +1,6 @@
+---
+
+- include: install.yml
+- include: config.yml
+- include: pear.yml
+- include: pecl.yml

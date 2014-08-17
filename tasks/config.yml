@@ -1,0 +1,32 @@
+---
+
+- name: Configuring logrotate
+  template: >
+    src=etc-logrotate-d-php5.j2
+    dest=/etc/logrotate.d/php5
+    owner=root
+    group=root
+    mode=0644
+  tags:
+    - web
+    - php5
+
+- name: Configuring apache2
+  ini_file: >
+    dest=/etc/php5/apache2/php.ini
+    section={{ item.section }}
+    option={{ item.option }}
+    value={{ item.value }}
+  notify: reload apache2
+  with_items: php5_apache2_ini
+
+- name: Configuring cli
+  ini_file: >
+    dest=/etc/php5/cli/php.ini
+    section={{ item.section }}
+    option={{ item.option }}
+    value={{ item.value }}
+  with_items: php5_cli_ini
+  tags:
+    - web
+    - php5
