@@ -33,29 +33,27 @@ $ git clone https://github.com/weareinteractive/ansible-php5.git
 
 ## Variables
 
-Here is a list of all the default variables for this role, which are also available in defaults/main.yml.
+Here is a list of all the default variables for this role, which are also available in `defaults/main.yml`.
 
 ```
-# php5_cli_ini:
+# php5_packages:
+#   - php5-gd
+#   - php5-dev
+# php5_cli_config:
 #   - { section: PHP, option: default_charset, value: UTF-8 }
-# php5_apache2_ini:
+# php5_apache2_config:
 #   - { section: PHP, option: default_charset, value: UTF-8 }
 
-# xtra packages
-php5_packages:
-  - php5-gd
-  - php5-dev
-  - php5-curl
-  - php5-xmlrpc
-  - php5-mcrypt
 # cli config settings
-php5_cli_ini: []
+php5_cli_config: []
 # cli config settings
-php5_apache2_ini: []
+php5_apache2_config: []
 # list of pear packages to install
 php5_pear_packages: []
 # list of pecl packages to install
 php5_pecl_packages: []
+# list of php modules to install & configure
+php5_modules: []
 ```
 
 ## Example playbook

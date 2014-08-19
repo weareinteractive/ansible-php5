@@ -1,23 +1,26 @@
 ---
 
-# pecl
 - name: updating pecl channles
   command: pecl update-channels
   tags:
     - web
     - php5
+    - pecl
 
 - name: upgrading pecl packages
   command: pecl upgrade
   tags:
     - web
     - php5
+    - pecl
 
 - name: installing pecl packages
   command: pecl install {{ item }}
   with_items: php5_pecl_packages
-  # this fails if the same package is already installed (wtf)
-  ignore_errors: yes
+  register: pecl_package_result
+  changed_when: "'is already installed' not in pecl_package_result.stdout"
+  failed_when: "'No releases available for package' in pecl_package_result.stdout"
   tags:
     - web
     - php5
+    - pecl

@@ -4,3 +4,4 @@
 - include: config.yml
 - include: pear.yml
 - include: pecl.yml
+- include: modules.yml

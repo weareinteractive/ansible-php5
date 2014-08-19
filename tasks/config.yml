@@ -10,6 +10,7 @@
   tags:
     - web
     - php5
+    - config
 
 - name: Configuring apache2
   ini_file: >
@@ -18,7 +19,11 @@
     option={{ item.option }}
     value={{ item.value }}
   notify: reload apache2
-  with_items: php5_apache2_ini
+  with_items: php5_apache2_config
+  tags:
+    - web
+    - php5
+    - config
 
 - name: Configuring cli
   ini_file: >
@@ -26,7 +31,8 @@
     section={{ item.section }}
     option={{ item.option }}
     value={{ item.value }}
-  with_items: php5_cli_ini
+  with_items: php5_cli_config
   tags:
     - web
     - php5
+    - config

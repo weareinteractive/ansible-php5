@@ -1,0 +1,80 @@
+---
+
+- name: Installing modules
+  apt: >
+    pkg={{ item.type if item.type is defined else 'php5' }}-{{ item.name }}
+    state=present
+  with_items: php5_modules
+  tags:
+    - web
+    - php5
+    - modules
+
+- name: Fixing config install path
+  command: >
+    mv /etc/php5/conf.d/{{ item.name }}.ini /etc/php5/mods-available/{{ item.name }}.ini
+    creates=/etc/php5/mods-available/{{ item.name }}.ini
+  with_items: php5_modules
+  ignore_errors: yes
+  tags:
+    - web
+    - php5
+    - modules
+
+- name: Creating config ini
+  command: >
+    touch /etc/php5/mods-available/{{ item.name }}.ini
+    creates=/etc/php5/mods-available/{{ item.name }}.ini
+  with_items: php5_modules
+  tags:
+    - web
+    - php5
+    - modules
+
+- name: Fixing config ini
+  lineinfile: >
+    dest=/etc/php5/mods-available/{{ item.name }}.ini
+    insertbefore=BOF
+    line="[default]"
+  with_items: php5_modules
+  tags:
+    - web
+    - php5
+    - modules
+
+- name: Configuring config
+  ini_file: >
+    dest=/etc/php5/mods-available/{{ item.0.name }}.ini
+    section={{ item.1.section|default(item.0.name) }}
+    option={{ item.1.section|default(item.0.name) }}.{{ item.1.option }}
+    value={{ item.1.value }}
+    state=present
+  with_subelements:
+    - php5_modules
+    - config
+  tags:
+    - web
+    - php5
+    - modules
+
+- name: Enabling modules
+  command: >
+    php5enmod {{ item.name }}
+    creates=/etc/php5/conf.d/*-{{ item.name }}.ini
+  when: item.state is not defined or item.state != 'absent'
+  with_items: php5_modules
+  tags:
+    - web
+    - php5
+    - modules
+
+- name: Disabling modules
+  command: >
+    php5dismod {{ item.name }}
+    removes=/etc/php5/conf.d/*-{{ item.name }}.ini
+  when: item.state is defined and item.state == 'absent'
+  with_items: php5_modules
+  tags:
+    - web
+    - php5
+    - modules
