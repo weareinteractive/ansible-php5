@@ -9,7 +9,7 @@
     - pear
 
 - name: Upgrading pear packages
-  command: pear upgrade
+  command: printf "\n" | pear upgrade
   # this fails if there is some output for adding extension
   ignore_errors: yes
   tags:
@@ -25,7 +25,7 @@
     - pear
 
 - name: Installing pear packages
-  command: pear install {{ item }}
+  command: printf "\n" | pear install {{ item }}
   with_items: php5_pear_packages
   register: pear_package_result
   changed_when: "'is already installed' not in pear_package_result.stdout"
