@@ -54,6 +54,11 @@ Here is a list of all the default variables for this role, which are also availa
 #  - { name: imagick, config: [] }
 #  - { name: mail, type: 'php', config: [] }
 #  - { name: mail-mime, type: 'php', config: [] }
+# php5_pear_packages:
+#  - Mail_IMAPv2
+# php5_pecl_packages:
+#  - { name: yaml, config: [] }
+#  - { name: mailparse, config: [] }
 
 # apt packages
 php5_packages:
