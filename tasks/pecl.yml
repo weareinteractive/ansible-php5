@@ -15,7 +15,7 @@
     - pecl
 
 - name: Installing pecl packages
-  command: printf "\n" | pecl install {{ item }}
+  command: printf "\n" | pecl install {{ item.name }}
   with_items: php5_pecl_packages
   register: pecl_package_result
   changed_when: "'is already installed' not in pecl_package_result.stdout"
