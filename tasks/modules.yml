@@ -60,7 +60,7 @@
 - name: Enabling modules
   command: >
     php5enmod {{ item.name }}
-    creates=/etc/php5/conf.d/*-{{ item.name }}.ini
+    creates=/etc/php5/cli/conf.d/..-{{ item.name }}.ini
   when: item.state is not defined or item.state != 'absent'
   with_items: php5_modules
   tags:
@@ -71,7 +71,7 @@
 - name: Disabling modules
   command: >
     php5dismod {{ item.name }}
-    removes=/etc/php5/conf.d/*-{{ item.name }}.ini
+    removes=/etc/php5/cli/conf.d/..-{{ item.name }}.ini
   when: item.state is defined and item.state == 'absent'
   with_items: php5_modules
   tags:

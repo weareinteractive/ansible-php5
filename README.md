@@ -43,7 +43,24 @@ Here is a list of all the default variables for this role, which are also availa
 #   - { section: PHP, option: default_charset, value: UTF-8 }
 # php5_apache2_config:
 #   - { section: PHP, option: default_charset, value: UTF-8 }
+# php5_modules:
+#  - { name: gd, config: [] }
+#  - { name: curl, config: [] }
+#  - { name: tidy, config: [] }
+#  - { name: mysql, config: [] }
+#  - { name: mcrypt, config: [] }
+#  - { name: xmlrpc, config: [] }
+#  - { name: xdebug, config: [] }
+#  - { name: imagick, config: [] }
+#  - { name: mail, type: 'php', config: [] }
+#  - { name: mail-mime, type: 'php', config: [] }
 
+# apt packages
+php5_packages:
+  - php5
+  - php5-dev
+  - php5-cli
+  - php-pear
 # cli config settings
 php5_cli_config: []
 # cli config settings
