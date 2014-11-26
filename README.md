@@ -88,7 +88,7 @@ php5_modules: []
   vars:
     apt_repositories:
       - 'ppa:ondrej/php5'
-    php5_cli_ini:
+    php5_cli_config:
       - { section: PHP, option: default_charset, value: UTF-8 }
       - { section: Date, option: date.timezone, value: Europe/Berlin }
       - { section: PHP, option: error_log, value: /var/log/php5/error-cli.log }
