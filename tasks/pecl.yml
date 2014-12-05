@@ -7,19 +7,9 @@
     - php5
     - pecl
 
-- name: Upgrading pecl packages
-  command: printf "\n" | pecl upgrade
-  tags:
-    - web
-    - php5
-    - pecl
-
 - name: Installing pecl packages
-  command: printf "\n" | pecl install {{ item.name }}
+  command: yes '' | pecl install -f {{ item.name }}
   with_items: php5_pecl_packages
-  register: pecl_package_result
-  changed_when: "'is already installed' not in pecl_package_result.stdout"
-  failed_when: "'No releases available for package' in pecl_package_result.stdout"
   tags:
     - web
     - php5
