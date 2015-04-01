@@ -1,23 +1,23 @@
 ---
 
+- name: Creating directories
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: "{{ php5_user }}"
+    group: "{{ php5_user }}"
+    mode: 0755
+  with_items:
+    - php5_log_path
+
 - name: Installing packages
   apt: >
     pkg={{ item }}
     state=present
   with_items: php5_packages
-  tags:
-    - web
-    - php5
-    - install
 
-- name: Creating log dir
-  file: >
-    dest=/var/log/php5
-    state=directory
-    owner=www-data
-    group=adm
-    mode=0750
-  tags:
-    - web
-    - php5
-    - install
+- name: Installing modules
+  apt:
+    pkg: "{{ item.type if item.type is defined else 'php5' }}-{{ item.name }}"
+    state: present
+  with_items: php5_modules

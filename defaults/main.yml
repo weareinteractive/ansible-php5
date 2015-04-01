@@ -26,6 +26,8 @@
 #  - { name: yaml, config: [] }
 #  - { name: mailparse, config: [] }
 
+# User
+php5_user: www-data
 # apt packages
 php5_packages:
   - php5
@@ -34,6 +36,8 @@ php5_packages:
   - php-pear
 # cli config settings
 php5_cli_config: []
+# error log path
+php5_log_path: /var/log/php5
 # cli config settings
 php5_apache2_config: []
 # list of pear packages to install

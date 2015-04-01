@@ -1,10 +1,10 @@
-# Ansible Php5 Role
+# Ansible PHP5 Role
 
 [![Build Status](https://travis-ci.org/weareinteractive/ansible-php5.png?branch=master)](https://travis-ci.org/weareinteractive/ansible-php5)
 [![Stories in Ready](https://badge.waffle.io/weareinteractive/ansible-php5.svg?label=ready&title=Ready)](http://waffle.io/weareinteractive/ansible-php5)
 
-> `php5` is an [ansible](http://www.ansible.com) role which: 
-> 
+> `php5` is an [ansible](http://www.ansible.com) role which:
+>
 > * installs php5
 > * configures php5
 > * installs xtra packages
@@ -19,10 +19,10 @@ Using `ansible-galaxy`:
 $ ansible-galaxy install franklinkim.php5
 ```
 
-Using `arm` ([Ansible Role Manager](https://github.com/mirskytech/ansible-role-manager/)):
+Using `requirements.yml`:
 
 ```
-$ arm install franklinkim.php5
+- src: franklinkim.php5
 ```
 
 Using `git`:
