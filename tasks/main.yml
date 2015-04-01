@@ -1,7 +1,39 @@
 ---
 
+- name: Loading variables
+  include_vars: "{{ ansible_distribution_release | lower }}.yml"
+  tags:
+    - web
+    - php5
+    - php5-vars
+
 - include: install.yml
+  tags:
+    - web
+    - php5
+    - php5-install
+
 - include: config.yml
+  tags:
+    - web
+    - php5
+    - php5-config
+
 - include: pear.yml
+  tags:
+    - web
+    - php5
+    - php5-pear
+
 - include: pecl.yml
+  tags:
+    - web
+    - php5
+    - php5-pecl
+
 - include: modules.yml
+  when: ansible_distribution_release != 'precise'
+  tags:
+    - web
+    - php5
+    - php5-pear

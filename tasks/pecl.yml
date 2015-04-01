@@ -2,65 +2,31 @@
 
 - name: Updating pecl channles
   command: pecl update-channels
-  tags:
-    - web
-    - php5
-    - pecl
 
 - name: Installing pecl packages
-  command: yes '' | pecl install -f {{ item.name }}
+  shell: >
+    echo "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" | pecl install {{ item.name }}
+  register: pecl_result
+  failed_when: "pecl_result.stderr or ('ERROR' in pecl_result.stdout)"
   with_items: php5_pecl_packages
-  tags:
-    - web
-    - php5
-    - pecl
 
 - name: Adding module extension
-  template: >
-    src=etc-php5-mods-available-module.ini.j2
-    dest=/etc/php5/mods-available/{{ item.name }}.ini
-    owner=root
-    group=root
-    mode=0644
+  template:
+    src: etc-php5-mods-available-module.ini.j2
+    dest: "{{ php5_module_path }}/{{ item.name }}.ini"
+    owner: root
+    group: root
+    mode: 0644
   with_items: php5_pecl_packages
-  tags:
-    - web
-    - php5
-    - pecl
 
 - name: Configuring config
-  ini_file: >
-    dest=/etc/php5/mods-available/{{ item.0.name }}.ini
-    section={{ item.1.section|default(item.0.name) }}
-    option={{ item.1.section|default(item.0.name) }}.{{ item.1.option }}
-    value={{ item.1.value }}
-    state=present
+  ini_file:
+    dest: "{{ php5_module_path }}/{{ item.0.name }}.ini"
+    section: "{{ item.1.section | default(item.0.name) }}"
+    option: "{{ item.1.section | default(item.0.name) }}.{{ item.1.option }}"
+    value: "{{ item.1.value }}"
+    state: present
   with_subelements:
     - php5_pecl_packages
     - config
-  tags:
-    - web
-    - php5
-    - pecl
 
-- name: Enabling modules
-  command: >
-    php5enmod {{ item.name }}
-    creates=/etc/php5/cli/conf.d/..-{{ item.name }}.ini
-  when: item.state is not defined or item.state != 'absent'
-  with_items: php5_pecl_packages
-  tags:
-    - web
-    - php5
-    - pecl
-
-- name: Disabling modules
-  command: >
-    php5dismod {{ item.name }}
-    removes=/etc/php5/cli/conf.d/..-{{ item.name }}.ini
-  when: item.state is defined and item.state == 'absent'
-  with_items: php5_pecl_packages
-  tags:
-    - web
-    - php5
-    - pecl
