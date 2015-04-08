@@ -2,7 +2,7 @@
 
 - name: Configuring logrotate
   template:
-    src: etc-logrotate-d-php5.j2
+    src: etc-logrotate.d-php5.j2
     dest: /etc/logrotate.d/php5
     owner: root
     group: root
