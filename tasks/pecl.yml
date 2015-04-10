@@ -10,7 +10,7 @@
   failed_when: "pecl_result.stderr or ('ERROR' in pecl_result.stdout)"
   with_items: php5_pecl_packages
 
-- name: Adding module extension
+- name: Adding pecl packages configs
   template:
     src: etc-php5-mods-available-module.ini.j2
     dest: "{{ php5_module_path }}/{{ item.name }}.ini"
@@ -19,7 +19,7 @@
     mode: 0644
   with_items: php5_pecl_packages
 
-- name: Configuring config
+- name: Configuring pecl packages configs
   ini_file:
     dest: "{{ php5_module_path }}/{{ item.0.name }}.ini"
     section: "{{ item.1.section | default(item.0.name) }}"

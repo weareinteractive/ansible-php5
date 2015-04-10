@@ -28,16 +28,16 @@
 
 # User
 php5_user: www-data
-# apt packages
+# apt packages (versions)
 php5_packages:
   - php5
   - php5-dev
   - php5-cli
   - php-pear
-# cli config settings
-php5_cli_config: []
 # error log path
 php5_log_path: /var/log/php5
+# cli config settings
+php5_cli_config: []
 # cli config settings
 php5_apache2_config: []
 # list of pear packages to install
