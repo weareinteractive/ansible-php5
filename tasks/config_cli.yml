@@ -1,0 +1,9 @@
+---
+
+- name: Configuring cli
+  ini_file:
+    dest: /etc/php5/cli/php.ini
+    section: "{{ item.section }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+  with_items: php5_cli_config

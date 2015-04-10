@@ -1,45 +1,25 @@
 ---
 
-- name: Configuring logrotate
-  template:
-    src: etc-logrotate.d-php5.j2
-    dest: /etc/logrotate.d/php5
-    owner: root
-    group: root
-    mode: 0644
+- include: config_cli.yml
+  when: php5_cli_config | length
 
-- name: Configuring apache2
-  ini_file:
-    dest: /etc/php5/apache2/php.ini
-    section: "{{ item.section }}"
-    option: "{{ item.option }}"
-    value: "{{ item.value }}"
-  notify: reload apache2
-  with_items: php5_apache2_config
+- include: config_apache2.yml
+  when: php5_apache2_config | length
 
-- name: Configuring cli
-  ini_file:
-    dest: /etc/php5/cli/php.ini
-    section: "{{ item.section }}"
-    option: "{{ item.option }}"
-    value: "{{ item.value }}"
-  with_items: php5_cli_config
-
-- name: Creating config ini
-  command: >
-    touch {{ php5_module_path }}/{{ item.name }}.ini
-  args:
-    creates: "{{ php5_module_path }}/{{ item.name }}.ini"
+- name: Creating module config files
+  file:
+    path: "{{ php5_module_path }}/{{ item.name }}.ini"
+    state: touch
   with_items: php5_modules
 
-- name: Fixing config ini
+- name: Fixing module config files
   lineinfile:
     dest: "{{ php5_module_path }}/{{ item.name }}.ini"
     insertbefore: BOF
     line: "[default]"
   with_items: php5_modules
 
-- name: Configuring config
+- name: Configuring modules
   ini_file:
     dest: "{{ php5_module_path }}/{{ item.0.name }}.ini"
     section: "{{ item.1.section | default(item.0.name) }}"
@@ -49,3 +29,11 @@
   with_subelements:
     - php5_modules
     - config
+
+- name: Configuring logrotate
+  template:
+    src: etc-logrotate.d-php5.j2
+    dest: /etc/logrotate.d/php5
+    owner: root
+    group: root
+    mode: 0644

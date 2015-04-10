@@ -1,0 +1,11 @@
+---
+
+- name: Configuring apache2
+  ini_file:
+    dest: /etc/php5/apache2/php.ini
+    section: "{{ item.section }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+  notify: reload apache2
+  with_items: php5_apache2_config
+
