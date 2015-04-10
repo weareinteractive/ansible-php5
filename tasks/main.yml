@@ -5,30 +5,37 @@
   tags:
     - web
     - php5
+    - vars
     - php5-vars
 
 - include: install.yml
   tags:
     - web
     - php5
+    - install
     - php5-install
 
 - include: config.yml
   tags:
     - web
     - php5
+    - config
     - php5-config
 
 - include: pear.yml
+  when: php5_pear_packages | length
   tags:
     - web
     - php5
+    - pear
     - php5-pear
 
 - include: pecl.yml
+  when: php5_pecl_packages | length
   tags:
     - web
     - php5
+    - pecl
     - php5-pecl
 
 - include: modules.yml
@@ -36,4 +43,5 @@
   tags:
     - web
     - php5
-    - php5-pear
+    - modules
+    - php5-modules

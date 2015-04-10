@@ -1,6 +1,7 @@
 ---
 
 - hosts: all
+  sudo: yes
   roles:
     - franklinkim.apt
     - franklinkim.php5
@@ -11,3 +12,5 @@
       - { section: PHP, option: default_charset, value: UTF-8 }
       - { section: Date, option: date.timezone, value: Europe/Berlin }
       - { section: PHP, option: error_log, value: /var/log/php5/error-cli.log }
+    php5_pecl_packages:
+      - { name: mailparse, config: [] }

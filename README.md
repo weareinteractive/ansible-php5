@@ -1,7 +1,9 @@
 # Ansible PHP5 Role
 
-[![Build Status](https://travis-ci.org/weareinteractive/ansible-php5.png?branch=master)](https://travis-ci.org/weareinteractive/ansible-php5)
-[![Stories in Ready](https://badge.waffle.io/weareinteractive/ansible-php5.svg?label=ready&title=Ready)](http://waffle.io/weareinteractive/ansible-php5)
+[![Build Status](https://img.shields.io/travis/weareinteractive/ansible-php5.svg)](https://travis-ci.org/weareinteractive/ansible-php5)
+[![Galaxy](http://img.shields.io/badge/galaxy-franklinkim.supervisor-blue.svg)](https://galaxy.ansible.com/list#/users/1401)
+[![GitHub Tags](https://img.shields.io/github/tag/weareinteractive/ansible-php5.svg)](https://github.com/weareinteractive/ansible-php5)
+[![GitHub Stars](https://img.shields.io/github/stars/weareinteractive/ansible-php5.svg)](https://github.com/weareinteractive/ansible-php5)
 
 > `php5` is an [ansible](http://www.ansible.com) role which:
 >
@@ -28,8 +30,12 @@ Using `requirements.yml`:
 Using `git`:
 
 ```
-$ git clone https://github.com/weareinteractive/ansible-php5.git
+$ git clone https://github.com/weareinteractive/ansible-php5.git franklinkim.php5
 ```
+
+## Dependencies
+
+* Ansible 1.9
 
 ## Variables
 
@@ -82,16 +88,19 @@ php5_modules: []
 
 ```
 - hosts: all
+  sudo: yes
   roles:
     - franklinkim.apt
     - franklinkim.php5
   vars:
     apt_repositories:
-      - 'ppa:ondrej/php5'
+      - 'ppa:ondrej/php5-oldstable'
     php5_cli_config:
       - { section: PHP, option: default_charset, value: UTF-8 }
       - { section: Date, option: date.timezone, value: Europe/Berlin }
       - { section: PHP, option: error_log, value: /var/log/php5/error-cli.log }
+    php5_pecl_packages:
+      - { name: mailparse, config: [] }
 ```
 
 ## Notes
