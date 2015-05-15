@@ -15,4 +15,4 @@
     php5_pear_packages:
       - { name: Mail, config: [] }
     php5_pecl_packages:
-      - { name: tidy, config: [] }
+      - { name: hrtime, config: [] }
