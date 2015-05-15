@@ -38,7 +38,9 @@ php5_packages:
 php5_log_path: /var/log/php5
 # cli config settings
 php5_cli_config: []
-# cli config settings
+# fpm config settings
+php5_fpm_config: []
+# apache config settings
 php5_apache2_config: []
 # list of pear packages to install
 php5_pear_packages: []

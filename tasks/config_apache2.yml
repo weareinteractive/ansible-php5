@@ -6,6 +6,6 @@
     section: "{{ item.section }}"
     option: "{{ item.option }}"
     value: "{{ item.value }}"
-  notify: reload apache2
+  notify: restart apache2
   with_items: php5_apache2_config
 
