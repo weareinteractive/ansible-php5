@@ -3,6 +3,9 @@
 - include: config_cli.yml
   when: php5_cli_config | length
 
+- include: config_fpm.yml
+  when: php5_fpm_config | length
+
 - include: config_apache2.yml
   when: php5_apache2_config | length
 
