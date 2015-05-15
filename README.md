@@ -12,6 +12,7 @@
 > * installs xtra packages
 > * installs pear packages
 > * installs pecl packages
+> * configures logrotate
 
 ## Installation
 
@@ -83,6 +84,13 @@ php5_pecl_packages: []
 # list of php modules to install & configure
 php5_modules: []
 ```
+
+## Handlers
+
+These are the handlers that are defined in `handlers/main.yml`.
+
+* `restart apache2`
+* `restart php5-fpm`
 
 ## Example playbook
 
