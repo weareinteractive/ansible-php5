@@ -8,16 +8,16 @@
     group: "{{ php5_user }}"
     mode: "0755"
   with_items:
-    - php5_log_path
+    - "{{ php5_log_path }}"
 
 - name: Installing packages
   apt:
     pkg: "{{ item }}"
     state: present
-  with_items: php5_packages
+  with_items: "{{ php5_packages }}"
 
 - name: Installing modules
   apt:
     pkg: "{{ item.type if item.type is defined else 'php5' }}-{{ item.name }}"
     state: present
-  with_items: php5_modules
+  with_items: "{{ php5_modules }}"

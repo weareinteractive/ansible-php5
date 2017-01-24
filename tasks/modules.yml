@@ -6,7 +6,7 @@
   args:
     creates: "/etc/php5/cli/conf.d/..-{{ item.name }}.ini"
   when: item.state is not defined or item.state != 'absent'
-  with_items: php5_modules
+  with_items: "{{ php5_modules }}"
 
 - name: Disabling modules
   command: >
@@ -14,7 +14,7 @@
   args:
     removes: "/etc/php5/cli/conf.d/..-{{ item.name }}.ini"
   when: item.state is defined and item.state == 'absent'
-  with_items: php5_modules
+  with_items: "{{ php5_modules }}"
 
 - name: Enabling pecl modules
   command: >
@@ -22,7 +22,7 @@
   args:
     creates: "/etc/php5/cli/conf.d/..-{{ item.name }}.ini"
   when: item.state is not defined or item.state != 'absent'
-  with_items: php5_pecl_packages
+  with_items: "{{ php5_pecl_packages }}"
 
 - name: Disabling pecl modules
   command: >
@@ -30,4 +30,4 @@
   args:
     removes: "/etc/php5/cli/conf.d/..-{{ item.name }}.ini"
   when: item.state is defined and item.state == 'absent'
-  with_items: php5_pecl_packages
+  with_items: "{{ php5_pecl_packages }}"

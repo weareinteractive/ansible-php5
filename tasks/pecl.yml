@@ -8,7 +8,7 @@
     echo "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" | pecl install {{ item.name }}
   register: pecl_result
   failed_when: "pecl_result.stderr or ('ERROR' in pecl_result.stdout)"
-  with_items: php5_pecl_packages
+  with_items: "{{ php5_pecl_packages }}"
 
 - name: Adding pecl packages configs
   template:
@@ -16,8 +16,8 @@
     dest: "{{ php5_module_path }}/{{ item.name }}.ini"
     owner: root
     group: root
-    mode: 0644
-  with_items: php5_pecl_packages
+    mode: "0644"
+  with_items: "{{ php5_pecl_packages }}"
 
 - name: Configuring pecl packages configs
   ini_file:
@@ -27,6 +27,6 @@
     value: "{{ item.1.value }}"
     state: present
   with_subelements:
-    - php5_pecl_packages
+    - "{{ php5_pecl_packages }}"
     - config
 
