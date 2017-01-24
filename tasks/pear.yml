@@ -15,7 +15,7 @@
 - name: Installing pear packages
   shell: >
     echo "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" | pear install {{ item }}
-  with_items: php5_pear_packages
+  with_items: "{{ php5_pear_packages }}"
   register: pear_package_result
   changed_when: "'is already installed' not in pear_package_result.stdout"
   failed_when: "'No releases available for package' in pear_package_result.stdout"

@@ -7,5 +7,5 @@
     option: "{{ item.option }}"
     value: "{{ item.value }}"
   notify: restart apache2
-  with_items: php5_apache2_config
+  with_items: "{{ php5_apache2_config }}"
 
