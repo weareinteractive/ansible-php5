@@ -16,3 +16,6 @@
       - { name: Mail, config: [] }
     php5_pecl_packages:
       - { name: hrtime, config: [] }
+    php5_packages:
+      - php5.6
+      - php-pear
