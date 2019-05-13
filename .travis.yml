@@ -8,11 +8,11 @@ env:
     - role: weareinteractive.php5
   matrix:
     - distribution: Ubuntu
-      distribution_version: "16.04"
-      init: /lib/systemd/systemd
-      run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
-    - distribution: Ubuntu
       distribution_version: "14.04"
+      init: /sbin/init
+      run_opts: ""
+    - distribution: Ubuntu
+      distribution_version: "12.04"
       init: /sbin/init
       run_opts: ""
 
@@ -30,7 +30,7 @@ script:
   - docker exec -t "$(cat ${container_id})" env TERM=xterm ansible --version
 
   # Install dependencies
-  - docker exec -t "$(cat ${container_id})" env TERM=xterm bash -c 'apt-get update && apt-get install -y python-apt build-essential ca-certificates'
+  - docker exec -t "$(cat ${container_id})" env TERM=xterm bash -c 'apt-get update && apt-get install -y build-essential'
   - docker exec -t "$(cat ${container_id})" env TERM=xterm bash -c 'ansible-galaxy install -c weareinteractive.apt'
 
   # Ansible syntax check.

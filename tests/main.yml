@@ -6,8 +6,6 @@
     - weareinteractive.apt
     - weareinteractive.php5
   vars:
-    apt_repositories:
-      - repo: "ppa:ondrej/php"
     php5_cli_config:
       - { section: PHP, option: default_charset, value: UTF-8 }
       - { section: Date, option: date.timezone, value: Europe/Berlin }
@@ -16,6 +14,3 @@
       - { name: Mail, config: [] }
     php5_pecl_packages:
       - { name: hrtime, config: [] }
-    php5_packages:
-      - php5.6
-      - php-pear
