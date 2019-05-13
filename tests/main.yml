@@ -1,13 +1,13 @@
 ---
 
 - hosts: all
-  sudo: yes
+  become: yes
   roles:
     - weareinteractive.apt
     - weareinteractive.php5
   vars:
     apt_repositories:
-      - 'ppa:ondrej/php'
+      - repo: "ppa:ondrej/php"
     php5_cli_config:
       - { section: PHP, option: default_charset, value: UTF-8 }
       - { section: Date, option: date.timezone, value: Europe/Berlin }
