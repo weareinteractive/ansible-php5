@@ -4,10 +4,10 @@
   sudo: yes
   roles:
     - weareinteractive.apt
-    - franklinkim.php5
+    - weareinteractive.php5
   vars:
     apt_repositories:
-      - 'ppa:ondrej/php5-oldstable'
+      - 'ppa:ondrej/php'
     php5_cli_config:
       - { section: PHP, option: default_charset, value: UTF-8 }
       - { section: Date, option: date.timezone, value: Europe/Berlin }

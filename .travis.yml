@@ -5,7 +5,7 @@ services:
   - docker
 env:
   global:
-    - role: weareinteractive.php5-newrelic
+    - role: weareinteractive.php5
   matrix:
     - distribution: Ubuntu
       distribution_version: "14.04"
@@ -24,6 +24,9 @@ script:
 
   # Print ansible version
   - docker exec -t "$(cat ${container_id})" env TERM=xterm ansible --version
+
+  # Install dependencies
+  - docker exec -t "$(cat ${container_id})" env TERM=xterm bash -c 'ansible-galaxy install -c weareinteractive.apt'
 
   # Ansible syntax check.
   - 'docker exec -t "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/${role}/tests/main.yml --syntax-check'
