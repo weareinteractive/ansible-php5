@@ -1,3 +1,13 @@
+<a name="1.6.0"></a>
+## 1.6.0 (2019-05-13)
+
+
+#### Features
+
+*   add xenial vars ([bd07f174](https://github.com/weareinteractive/ansible-php5/commit/bd07f1747a3c39faf1b620bf92f32975bc1d41d8))
+
+
+
 <a name="1.5.0"></a>
 ## 1.5.0 (2017-01-24)
 
