@@ -1,0 +1,20 @@
+---
+galaxy_name: weareinteractive.php5
+github_user: weareinteractive
+github_name: ansible-php5
+badges: |
+  [![Build Status](https://img.shields.io/travis/weareinteractive/ansible-php5.svg)](https://travis-ci.org/weareinteractive/ansible-php5)
+  [![Galaxy](https://img.shields.io/badge/galaxy-weareinteractive.php5-blue.svg)](https://galaxy.ansible.com/weareinteractive/php5)
+  [![GitHub Tags](https://img.shields.io/github/tag/weareinteractive/ansible-php5.svg)](https://github.com/weareinteractive/ansible-php5)
+  [![GitHub Stars](https://img.shields.io/github/stars/weareinteractive/ansible-php5.svg)](https://github.com/weareinteractive/ansible-php5)
+description: |
+  > * installs php5
+  > * configures php5
+  > * installs xtra packages
+  > * installs pear packages
+  > * installs pecl packages
+  > * configures logrotate
+after_dependencies: |
+  **Note:**
+
+  > Since Ansible Galaxy supports [organization](https://www.ansible.com/blog/ansible-galaxy-2-release) now, this role has moved from `franklinkim.php5` to `weareinteractive.php5`!

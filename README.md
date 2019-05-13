@@ -1,11 +1,11 @@
-# Ansible PHP5 Role
+# Ansible weareinteractive.php5 role
 
 [![Build Status](https://img.shields.io/travis/weareinteractive/ansible-php5.svg)](https://travis-ci.org/weareinteractive/ansible-php5)
-[![Galaxy](http://img.shields.io/badge/galaxy-franklinkim.supervisor-blue.svg)](https://galaxy.ansible.com/list#/users/1401)
+[![Galaxy](https://img.shields.io/badge/galaxy-weareinteractive.php5-blue.svg)](https://galaxy.ansible.com/weareinteractive/php5)
 [![GitHub Tags](https://img.shields.io/github/tag/weareinteractive/ansible-php5.svg)](https://github.com/weareinteractive/ansible-php5)
 [![GitHub Stars](https://img.shields.io/github/stars/weareinteractive/ansible-php5.svg)](https://github.com/weareinteractive/ansible-php5)
 
-> `php5` is an [ansible](http://www.ansible.com) role which:
+> `weareinteractive.php5` is an [Ansible](http://www.ansible.com) role which:
 >
 > * installs php5
 > * configures php5
@@ -18,31 +18,38 @@
 
 Using `ansible-galaxy`:
 
-```
-$ ansible-galaxy install franklinkim.php5
+```shell
+$ ansible-galaxy install weareinteractive.php5
 ```
 
 Using `requirements.yml`:
 
-```
-- src: franklinkim.php5
+```yaml
+- src: weareinteractive.php5
 ```
 
 Using `git`:
 
-```
-$ git clone https://github.com/weareinteractive/ansible-php5.git franklinkim.php5
+```shell
+$ git clone https://github.com/weareinteractive/ansible-php5.git weareinteractive.php5
 ```
 
 ## Dependencies
 
-* Ansible 1.9
+* Ansible >= 2.4
+**Note:**
+
+> Since Ansible Galaxy supports [organization](https://www.ansible.com/blog/ansible-galaxy-2-release) now, this role has moved from `franklinkim.php5` to `weareinteractive.php5`!
 
 ## Variables
 
 Here is a list of all the default variables for this role, which are also available in `defaults/main.yml`.
 
-```
+```yaml
+---
+# For more information about default variables see:
+# http://www.ansibleworks.com/docs/playbooks_variables.html#id26
+#
 # php5_packages:
 #   - php5-gd
 #   - php5-dev
@@ -67,15 +74,21 @@ Here is a list of all the default variables for this role, which are also availa
 #  - { name: yaml, config: [] }
 #  - { name: mailparse, config: [] }
 
-# apt packages
+# User
+php5_user: www-data
+# apt packages (versions)
 php5_packages:
   - php5
   - php5-dev
   - php5-cli
   - php-pear
+# error log path
+php5_log_path: /var/log/php5
 # cli config settings
 php5_cli_config: []
-# cli config settings
+# fpm config settings
+php5_fpm_config: []
+# apache config settings
 php5_apache2_config: []
 # list of pear packages to install
 php5_pear_packages: []
@@ -83,26 +96,38 @@ php5_pear_packages: []
 php5_pecl_packages: []
 # list of php modules to install & configure
 php5_modules: []
+
 ```
 
 ## Handlers
 
 These are the handlers that are defined in `handlers/main.yml`.
 
-* `restart apache2`
-* `restart php5-fpm`
+```yaml
+---
 
-## Example playbook
+- name: restart apache2
+  service: name=apache2 state=restarted
+
+- name: restart php5-fpm
+  service: name=php5-fpm state=restarted
 
 ```
+
+
+## Usage
+
+This is an example playbook:
+
+```yaml
+---
+
 - hosts: all
-  sudo: yes
+  become: yes
   roles:
-    - franklinkim.apt
-    - franklinkim.php5
+    - weareinteractive.apt
+    - weareinteractive.php5
   vars:
-    apt_repositories:
-      - 'ppa:ondrej/php5-oldstable'
     php5_cli_config:
       - { section: PHP, option: default_charset, value: UTF-8 }
       - { section: Date, option: date.timezone, value: Europe/Berlin }
@@ -110,34 +135,34 @@ These are the handlers that are defined in `handlers/main.yml`.
     php5_pear_packages:
       - { name: Mail, config: [] }
     php5_pecl_packages:
-      - { name: tidy, config: [] }
-```
-
-## Notes
-
-You can use `franklinkim.apt` to add a repository to get the latest `php5`:
+      - { name: hrtime, config: [] }
 
 ```
-apt_repositories:
-  - 'ppa:ondrej/php5'
-```
+
 
 ## Testing
 
-```
+```shell
 $ git clone https://github.com/weareinteractive/ansible-php5.git
 $ cd ansible-php5
-$ vagrant up
+$ make test
 ```
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests and examples for any new or changed functionality.
+In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests and examples for any new or changed functionality.
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+*Note: To update the `README.md` file please install and run `ansible-role`:*
+
+```shell
+$ gem install ansible-role
+$ ansible-role docgen
+```
 
 ## License
 Copyright (c) We Are Interactive under the MIT license.
