@@ -8,21 +8,21 @@
     - vars
     - php5-vars
 
-- include: install.yml
+- import_tasks: install.yml
   tags:
     - web
     - php5
     - install
     - php5-install
 
-- include: config.yml
+- import_tasks: config.yml
   tags:
     - web
     - php5
     - config
     - php5-config
 
-- include: pear.yml
+- import_tasks: pear.yml
   when: php5_pear_packages | length
   tags:
     - web
@@ -30,7 +30,7 @@
     - pear
     - php5-pear
 
-- include: pecl.yml
+- import_tasks: pecl.yml
   when: php5_pecl_packages | length
   tags:
     - web
@@ -38,7 +38,7 @@
     - pecl
     - php5-pecl
 
-- include: modules.yml
+- import_tasks: modules.yml
   when: ansible_distribution_release != 'precise'
   tags:
     - web
