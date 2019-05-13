@@ -8,6 +8,9 @@ TEST_PLAYBOOK=ansible-playbook -vvvv -i 'localhost,' -c local $(ROLE_PATH)/tests
 TEST_IDEMPOTENT=$(TEST_PLAYBOOK) | grep -q 'failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
 TEST_CMD=$(TEST_DEPS); $(TEST_VERSION); $(TEST_SYNTAX); $(TEST_DEPS); $(TEST_PLAYBOOK); $(TEST_IDEMPOTENT)
 
+lint:
+	ansible-lint .
+
 ubuntu12.04: dist=ubuntu-12.04
 ubuntu12.04: .run
 
