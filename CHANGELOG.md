@@ -1,3 +1,13 @@
+<a name="1.6.1"></a>
+### 1.6.1 (2019-05-13)
+
+
+#### Features
+
+*   add lint ([415eba7e](https://github.com/weareinteractive/ansible-php5/commit/415eba7e8e065d6a665f53522a120c79afdc84b3))
+
+
+
 <a name="1.6.0"></a>
 ## 1.6.0 (2019-05-13)
 
